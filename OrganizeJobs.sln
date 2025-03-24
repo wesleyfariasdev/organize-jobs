@@ -13,13 +13,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizeJobs.Infra.IoC", "s
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizeJobs.Application", "src\OrganizeJobs.Application\OrganizeJobs.Application.csproj", "{B310AAA1-00A2-1DE7-8403-41A0718DAF66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizeJobs.Api", "presentation\OrganizeJobs.Api\OrganizeJobs.Api.csproj", "{08B44B8B-353B-E0B8-7F83-35C37200A827}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizeJobs.Api", "api-services\OrganizeJobs.Api\OrganizeJobs.Api.csproj", "{08B44B8B-353B-E0B8-7F83-35C37200A827}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizeJobs.AppHost", "presentation\OrganizeJobs.AppHost\OrganizeJobs.AppHost.csproj", "{5D09E9F9-FD98-4E67-945F-2877B6DC48C8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizeJobs.AppHost", "api-services\OrganizeJobs.AppHost\OrganizeJobs.AppHost.csproj", "{5D09E9F9-FD98-4E67-945F-2877B6DC48C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizeJobs.ServiceDefaults", "presentation\OrganizeJobs.ServiceDefaults\OrganizeJobs.ServiceDefaults.csproj", "{4C131134-B35E-32BA-3789-5F8475E6F405}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrganizeJobs.ServiceDefaults", "api-services\OrganizeJobs.ServiceDefaults\OrganizeJobs.ServiceDefaults.csproj", "{4C131134-B35E-32BA-3789-5F8475E6F405}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "presentation", "presentation", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api-services", "api-services", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1676D334-53F9-4E56-ACD9-9F8BC7576AFA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
