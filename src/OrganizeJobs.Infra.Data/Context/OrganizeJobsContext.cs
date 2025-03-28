@@ -3,7 +3,7 @@ using OrganizeJobs.Domain.Models;
 
 namespace OrganizeJobs.Infra.Data.Context;
 
-internal class OrganizeJobsContext : DbContext
+public class OrganizeJobsContext : DbContext
 {
     public DbSet<Empresa> Empresas { get; set; }
     public DbSet<Projeto> Projetos { get; set; }
