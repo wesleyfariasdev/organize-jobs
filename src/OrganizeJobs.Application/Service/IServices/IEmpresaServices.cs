@@ -1,7 +1,7 @@
 ﻿using OrganizeJobs.Application.Dto.Request;
 using OrganizeJobs.Application.Dto.Response;
 
-namespace OrganizeJobs.Application.Service;
+namespace OrganizeJobs.Application.Service.IServices;
 
 public interface IEmpresaServices
 {
