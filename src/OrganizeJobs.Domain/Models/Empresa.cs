@@ -9,4 +9,6 @@ public sealed class Empresa
 
     public Guid Id { get; set; }
     public string NomeEmpresa { get; set; }
+
+    public Projeto[] Projeto { get; set; }
 }
