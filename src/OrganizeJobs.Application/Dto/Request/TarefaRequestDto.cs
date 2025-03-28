@@ -1,6 +1,6 @@
 ﻿namespace OrganizeJobs.Application.Dto.Request;
 
-internal record TarefaRequestDto(
+public sealed record TarefaRequestDto(
     string NomeTarefa,
     string? DescricaoTarefa,
     DateTime DataInicio,

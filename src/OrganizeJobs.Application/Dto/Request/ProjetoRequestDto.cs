@@ -1,6 +1,6 @@
 ﻿namespace OrganizeJobs.Application.Dto.Request;
 
-internal record ProjetoRequestDto(
+public sealed record ProjetoRequestDto(
     string NomeProjeto,
     string? Descricao,
     string? ProjetoLink,
