@@ -22,4 +22,6 @@ public sealed class Tarefa
 
     public Guid ProjetoId { get; set; }
     public Projeto Projeto { get; set; }
+
+    public HistoricoAtividade[] HistoricoAtividade { get; set; }
 }
