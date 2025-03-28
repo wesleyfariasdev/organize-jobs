@@ -1,18 +1,11 @@
 ﻿namespace OrganizeJobs.Domain.Models;
 
-public sealed class HistoricoAtividade
+public sealed class HistoricoAtividade(DateTime inicioAtividade, DateTime? fimAtividade, Guid tarefaId)
 {
-    public HistoricoAtividade(DateTime inicioAtividade, DateTime? fimAtividade, Guid tarefaId)
-    {
-        InicioAtividade = inicioAtividade;
-        FimAtividade = fimAtividade;
-        TarefaId = tarefaId;
-    }
-
     public Guid Id { get; set; }
-    public DateTime InicioAtividade { get; set; }
-    public DateTime? FimAtividade { get; set; }
+    public DateTime InicioAtividade { get; set; } = inicioAtividade;
+    public DateTime? FimAtividade { get; set; } = fimAtividade;
 
-    public Guid TarefaId { get; set; }
-    public Tarefa Tarefa { get; set; }
+    public Guid TarefaId { get; set; } = tarefaId;
+    public Tarefa? Tarefa { get; set; }
 }

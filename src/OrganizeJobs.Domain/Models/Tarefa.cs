@@ -1,27 +1,16 @@
 ﻿namespace OrganizeJobs.Domain.Models;
 
-public sealed class Tarefa
+public sealed class Tarefa(Guid id, string nomeTarefa, string? descricaoTarefa, DateTime dataInicio, DateTime? prazo, bool concluida, Guid projetoId)
 {
-    public Tarefa(Guid id, string nomeTarefa, string? descricaoTarefa, DateTime dataInicio, DateTime? prazo, bool concluida, Guid projetoId)
-    {
-        Id = id;
-        NomeTarefa = nomeTarefa;
-        DescricaoTarefa = descricaoTarefa;
-        DataInicio = dataInicio;
-        Prazo = prazo;
-        Concluida = concluida;
-        ProjetoId = projetoId;
-    }
+    public Guid Id { get; set; } = id;
+    public string NomeTarefa { get; set; } = nomeTarefa;
+    public string? DescricaoTarefa { get; set; } = descricaoTarefa;
+    public DateTime DataInicio { get; set; } = dataInicio;
+    public DateTime? Prazo { get; set; } = prazo;
+    public bool Concluida { get; set; } = concluida;
 
-    public Guid Id { get; set; }
-    public string NomeTarefa { get; set; }
-    public string? DescricaoTarefa { get; set; }
-    public DateTime DataInicio { get; set; }
-    public DateTime? Prazo { get; set; }
-    public bool Concluida { get; set; }
+    public Guid ProjetoId { get; set; } = projetoId;
+    public Projeto? Projeto { get; set; }
 
-    public Guid ProjetoId { get; set; }
-    public Projeto Projeto { get; set; }
-
-    public HistoricoAtividade[] HistoricoAtividade { get; set; }
+    public HistoricoAtividade[]? HistoricoAtividade { get; set; }
 }
