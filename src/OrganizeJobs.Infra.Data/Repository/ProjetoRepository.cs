@@ -1,33 +1,56 @@
-﻿using OrganizeJobs.Domain.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using OrganizeJobs.Domain.Interface;
 using OrganizeJobs.Domain.Models;
 using OrganizeJobs.Infra.Data.Context;
 
 namespace OrganizeJobs.Infra.Data.Repository;
 
-internal class ProjetoRepository(OrganizeJobsContext context) : IProjetoRepository
+internal class ProjetoRepository : IProjetoRepository
 {
-    public Task<Projeto> AtualizarProjeto(Projeto projeto)
+    private readonly OrganizeJobsContext _context;
+
+    public ProjetoRepository(OrganizeJobsContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<Projeto> CriarProjeto(Projeto projeto)
+    public async Task<Projeto[]> ObterTodosProjetos()
     {
-        throw new NotImplementedException();
+        return await _context.Projetos
+            .Include(p => p.Empresa)
+            .Include(p => p.Tarefas)
+            .OrderByDescending(p => p.DataInicio)
+            .ToArrayAsync();
     }
 
-    public Task<bool> DeletarProjeto(Projeto projeto)
+    public async Task<Projeto> ObterProjetoPorId(Guid id)
     {
-        throw new NotImplementedException();
+        return await _context.Projetos
+            .Include(p => p.Empresa)
+            .Include(p => p.Tarefas)
+            .FirstOrDefaultAsync(p => p.Id == id);
     }
 
-    public Task<Projeto> ObterProjetoPorId(Guid id)
+    public async Task<Projeto> CriarProjeto(Projeto projeto)
     {
-        throw new NotImplementedException();
+        await _context.Projetos.AddAsync(projeto);
+        await _context.SaveChangesAsync();
+        return projeto;
     }
 
-    public Task<Projeto[]> ObterTodosProjetos()
+    public async Task<Projeto> AtualizarProjeto(Projeto projeto)
     {
-        throw new NotImplementedException();
+        _context.Projetos.Update(projeto);
+        await _context.SaveChangesAsync();
+        return projeto;
+    }
+
+    public async Task<bool> DeletarProjeto(Projeto projeto)
+    {
+        var projetoExistente = await ObterProjetoPorId(projeto.Id);
+        if (projetoExistente == null) return false;
+
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

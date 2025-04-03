@@ -1,33 +1,56 @@
-﻿using OrganizeJobs.Domain.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using OrganizeJobs.Domain.Interface;
 using OrganizeJobs.Domain.Models;
 using OrganizeJobs.Infra.Data.Context;
 
 namespace OrganizeJobs.Infra.Data.Repository;
 
-internal class TarefaRepository(OrganizeJobsContext context) : ITarefaRepository
+internal class TarefaRepository : ITarefaRepository
 {
-    public Task<Tarefa> AtualizarTarefa(Tarefa tarefa)
+    private readonly OrganizeJobsContext _context;
+
+    public TarefaRepository(OrganizeJobsContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<Tarefa> CriarTarefa(Tarefa tarefa)
+    public async Task<Tarefa[]> ObterTodasTarefas()
     {
-        throw new NotImplementedException();
+        return await _context.Tarefas
+            .Include(t => t.Projeto)
+            .Include(t => t.HistoricoAtividade)
+            .OrderByDescending(t => t.DataInicio)
+            .ToArrayAsync();
     }
 
-    public Task<bool> DeletarPorId(Guid id)
+    public async Task<Tarefa> ObterTarefaPorId(Guid id)
     {
-        throw new NotImplementedException();
+        return await _context.Tarefas
+            .Include(t => t.Projeto)
+            .Include(t => t.HistoricoAtividade)
+            .FirstOrDefaultAsync(t => t.Id == id);
     }
 
-    public Task<Tarefa> ObterTarefaPorId(Guid id)
+    public async Task<Tarefa> CriarTarefa(Tarefa tarefa)
     {
-        throw new NotImplementedException();
+        await _context.Tarefas.AddAsync(tarefa);
+        await _context.SaveChangesAsync();
+        return tarefa;
     }
 
-    public Task<Tarefa[]> ObterTodasTarefas()
+    public async Task<Tarefa> AtualizarTarefa(Tarefa tarefa)
     {
-        throw new NotImplementedException();
+        _context.Tarefas.Update(tarefa);
+        await _context.SaveChangesAsync();
+        return tarefa;
+    }
+
+    public async Task<bool> DeletarPorId(Guid id)
+    {
+        var tarefa = await ObterTarefaPorId(id);
+        if (tarefa == null) return false;
+
+        await _context.SaveChangesAsync();
+        return true;
     }
 }

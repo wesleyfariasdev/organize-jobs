@@ -1,33 +1,54 @@
-﻿using OrganizeJobs.Domain.Interface;
+﻿using Microsoft.EntityFrameworkCore;
+using OrganizeJobs.Domain.Interface;
 using OrganizeJobs.Domain.Models;
 using OrganizeJobs.Infra.Data.Context;
 
 namespace OrganizeJobs.Infra.Data.Repository;
 
-internal class EmpresaRepository(OrganizeJobsContext context) : IEmpresaRepository
+internal class EmpresaRepository : IEmpresaRepository
 {
-    public Task<Empresa> AtualizarEmpresa(Empresa empresa)
+    private readonly OrganizeJobsContext _context;
+
+    public EmpresaRepository(OrganizeJobsContext context)
     {
-        throw new NotImplementedException();
+        _context = context;
     }
 
-    public Task<Empresa> CraiarEmpresa(Empresa empresa)
+    public async Task<Empresa[]> ObterTodasEmpresas()
     {
-        throw new NotImplementedException();
+        return await _context.Empresas
+            .Include(e => e.Projeto)
+            .OrderBy(e => e.NomeEmpresa)
+            .ToArrayAsync();
     }
 
-    public Task<bool> DeletarEmpresa(Guid id)
+    public async Task<Empresa> ObterEmpresaPorId(Guid id)
     {
-        throw new NotImplementedException();
+        return await _context.Empresas
+            .Include(e => e.Projeto)
+            .FirstOrDefaultAsync(e => e.Id == id);
     }
 
-    public Task<Empresa> ObterEmpresaPorId(Guid id)
+    public async Task<Empresa> CraiarEmpresa(Empresa empresa)
     {
-        throw new NotImplementedException();
+        await _context.Empresas.AddAsync(empresa);
+        await _context.SaveChangesAsync();
+        return empresa;
     }
 
-    public Task<Empresa[]> ObterTodasEmpresas()
+    public async Task<Empresa> AtualizarEmpresa(Empresa empresa)
     {
-        throw new NotImplementedException();
+        _context.Empresas.Update(empresa);
+        await _context.SaveChangesAsync();
+        return empresa;
+    }
+
+    public async Task<bool> DeletarEmpresa(Guid id)
+    {
+        var empresa = await ObterEmpresaPorId(id);
+        if (empresa == null) return false;
+
+        await _context.SaveChangesAsync();
+        return true;
     }
 }
