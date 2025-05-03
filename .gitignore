@@ -398,3 +398,5 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+/src/OrganizeJobs.Infra.Data/Migrations
+/api-services/OrganizeJobs.Api/appsettings.json
