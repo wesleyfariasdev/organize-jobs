@@ -5,7 +5,7 @@ using OrganizeJobs.Infra.Data.Context;
 
 namespace OrganizeJobs.Infra.IoC.DataBase;
 
-internal static class SQLServerConfig
+public static class SQLServerConfig
 {
     public static IServiceCollection AddDbConfig(this IServiceCollection services, IConfiguration config)
     {
