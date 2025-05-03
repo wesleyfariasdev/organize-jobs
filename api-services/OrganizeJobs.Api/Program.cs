@@ -1,3 +1,5 @@
+using OrganizeJobs.Infra.IoC.DataBase;
+using OrganizeJobs.Infra.IoC.Services;
 using OrganizeJobs.ServiceDefaults;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
 // Add services to the container.
+builder.Services.AddDbConfig(builder.Configuration);
+builder.Services.AddService();
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
