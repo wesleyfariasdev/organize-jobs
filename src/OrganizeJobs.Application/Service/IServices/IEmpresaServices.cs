@@ -7,7 +7,7 @@ public interface IEmpresaServices
 {
     Task<EmpresaResponseDto[]> ObterTodasEmpresas();
     Task<EmpresaResponseDto> ObterEmpresaPorId(Guid id);
-    Task<EmpresaResponseDto> CraiarEmpresa(EmpresaRequestDto empresa);
-    Task<EmpresaResponseDto> AtualizarEmpresa(EmpresaRequestDto empresa);
+    Task<EmpresaResponseDto> CriarEmpresa(EmpresaRequestDto empresa);
+    Task<EmpresaResponseDto> AtualizarEmpresa(Guid id, EmpresaRequestDto empresa);
     Task<bool> DeletarEmpresa(Guid id);
 }
