@@ -5,7 +5,7 @@ using OrganizeJobs.Infra.Data.Context;
 
 namespace OrganizeJobs.Infra.Data.Repository;
 
-internal class ProjetoRepository : IProjetoRepository
+public class ProjetoRepository : IProjetoRepository
 {
     private readonly OrganizeJobsContext _context;
 
@@ -45,9 +45,9 @@ internal class ProjetoRepository : IProjetoRepository
         return projeto;
     }
 
-    public async Task<bool> DeletarProjeto(Projeto projeto)
+    public async Task<bool> DeletarProjeto(Guid id)
     {
-        var projetoExistente = await ObterProjetoPorId(projeto.Id);
+        var projetoExistente = await ObterProjetoPorId(id);
         if (projetoExistente == null) return false;
 
         await _context.SaveChangesAsync();

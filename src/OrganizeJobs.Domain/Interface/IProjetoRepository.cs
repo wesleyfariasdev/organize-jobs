@@ -8,5 +8,5 @@ public interface IProjetoRepository
     Task<Projeto> ObterProjetoPorId(Guid id);
     Task<Projeto> CriarProjeto(Projeto projeto);
     Task<Projeto> AtualizarProjeto(Projeto projeto);
-    Task<bool> DeletarProjeto(Projeto projeto);
+    Task<bool> DeletarProjeto(Guid id);
 }
