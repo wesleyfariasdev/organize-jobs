@@ -5,7 +5,7 @@ using OrganizeJobs.Infra.Data.Context;
 
 namespace OrganizeJobs.Infra.Data.Repository;
 
-internal class EmpresaRepository : IEmpresaRepository
+public class EmpresaRepository : IEmpresaRepository
 {
     private readonly OrganizeJobsContext _context;
 
@@ -17,16 +17,13 @@ internal class EmpresaRepository : IEmpresaRepository
     public async Task<Empresa[]> ObterTodasEmpresas()
     {
         return await _context.Empresas
-            .Include(e => e.Projeto)
-            .OrderBy(e => e.NomeEmpresa)
-            .ToArrayAsync();
+                             .ToArrayAsync();
     }
 
     public async Task<Empresa> ObterEmpresaPorId(Guid id)
     {
         return await _context.Empresas
-            .Include(e => e.Projeto)
-            .FirstOrDefaultAsync(e => e.Id == id);
+                             .FirstOrDefaultAsync(e => e.Id == id);
     }
 
     public async Task<Empresa> CraiarEmpresa(Empresa empresa)
@@ -36,11 +33,18 @@ internal class EmpresaRepository : IEmpresaRepository
         return empresa;
     }
 
-    public async Task<Empresa> AtualizarEmpresa(Empresa empresa)
+    public async Task<Empresa> AtualizarEmpresa(Guid id, Empresa empresa)
     {
-        _context.Empresas.Update(empresa);
+        var empresaExist = await _context.Empresas.Where(x => x.Id == id)
+                                                  .FirstOrDefaultAsync();
+
+        if (empresaExist == null)
+            throw new Exception();
+
+        empresaExist.AtualizarNome(empresa.NomeEmpresa);
+        _context.Empresas.Update(empresaExist);
         await _context.SaveChangesAsync();
-        return empresa;
+        return empresaExist;
     }
 
     public async Task<bool> DeletarEmpresa(Guid id)

@@ -5,7 +5,7 @@ using OrganizeJobs.Infra.Data.Context;
 
 namespace OrganizeJobs.Infra.Data.Repository;
 
-internal class HistoricoAtividadeRepository : IHistoricoAtividadeRespository
+public class HistoricoAtividadeRepository : IHistoricoAtividadeRespository
 {
     private readonly OrganizeJobsContext _context;
 
@@ -43,9 +43,9 @@ internal class HistoricoAtividadeRepository : IHistoricoAtividadeRespository
         return historicoAtividade;
     }
 
-    public async Task<bool> DeletarHistoricoAtividade(HistoricoAtividade historicoAtividade)
+    public async Task<bool> DeletarHistoricoAtividade(Guid id)
     {
-        var historicoExistente = await ObterDetalheHistoricoAtividadePorId(historicoAtividade.Id);
+        var historicoExistente = await ObterDetalheHistoricoAtividadePorId(id);
         if (historicoExistente == null) return false;
 
         await _context.SaveChangesAsync();

@@ -5,7 +5,7 @@ using OrganizeJobs.Infra.Data.Context;
 
 namespace OrganizeJobs.Infra.Data.Repository;
 
-internal class TarefaRepository : ITarefaRepository
+public class TarefaRepository : ITarefaRepository
 {
     private readonly OrganizeJobsContext _context;
 
