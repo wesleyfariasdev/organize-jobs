@@ -8,5 +8,5 @@ public interface IHistoricoAtividadeRespository
     Task<HistoricoAtividade> ObterDetalheHistoricoAtividadePorId(Guid historicoAtividadeId);
     Task<HistoricoAtividade> CriarHistorico(HistoricoAtividade historicoAtividade);
     Task<HistoricoAtividade> AtualizarHistoricoAtividade(HistoricoAtividade historicoAtividade);
-    Task<bool> DeletarHistoricoAtividade(HistoricoAtividade historicoAtividadeId);
+    Task<bool> DeletarHistoricoAtividade(Guid id);
 }
